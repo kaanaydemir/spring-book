@@ -1,6 +1,7 @@
 package com.kaanaydemir.bookapi.controller;
 
 import com.kaanaydemir.bookapi.dtos.BookDto;
+import com.kaanaydemir.bookapi.dtos.getbookdetails.GetBookDetailsResponse;
 import com.kaanaydemir.bookapi.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +29,10 @@ public class BookController {
     public ResponseEntity<Long> deleteBookById(@PathVariable Long id) {
         bookService.deleteBookById(id);
         return ResponseEntity.ok(id);
+    }
+
+    @GetMapping("/details/{id}")
+    public ResponseEntity<GetBookDetailsResponse> getBookDetailsById(@PathVariable Long id) {
+        return ResponseEntity.ok(bookService.getBookDetailsById(id));
     }
 }
