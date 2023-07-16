@@ -5,6 +5,8 @@ import com.kaanaydemir.userapi.client.BookClient;
 import com.kaanaydemir.userapi.dto.KafkaReadListDto;
 import com.kaanaydemir.userapi.dto.UserDto;
 import com.kaanaydemir.userapi.entity.User;
+import com.kaanaydemir.userapi.exception.BookNotFoundException;
+import com.kaanaydemir.userapi.exception.UserNotFoundException;
 import com.kaanaydemir.userapi.kafka.KafkaTopicConfig;
 import com.kaanaydemir.userapi.mapper.UserMapper;
 import com.kaanaydemir.userapi.repository.UserRepository;
@@ -43,11 +45,11 @@ public class UserService {
         boolean isUserExist = userRepository.existsById(userId);
 
         if(!isUserExist) {
-            throw new RuntimeException("User not found!");
+            throw new UserNotFoundException("User not found!");
         }
 
-        if (!bookClient.isBookExist(bookId)) {
-            throw new RuntimeException("Book not found!");
+        if (Boolean.FALSE.equals(bookClient.isBookExist(bookId))) {
+            throw new BookNotFoundException("Book not found!");
         }
         KafkaReadListDto kafkaReadListDto = new KafkaReadListDto(userId, bookId);
         Gson gson = new Gson();

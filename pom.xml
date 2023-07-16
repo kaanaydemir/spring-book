@@ -25,6 +25,7 @@
         <module>author-api</module>
         <module>book-api</module>
         <module>user-api</module>
+        <module>read-api</module>
     </modules>
 
     <build>

@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/author-api/pom.xml" />
         <option value="$PROJECT_DIR$/book-api/pom.xml" />
         <option value="$PROJECT_DIR$/user-api/pom.xml" />
+        <option value="$PROJECT_DIR$/read-api/pom.xml" />
       </list>
     </option>
   </component>

@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface BookClient {
 
     @GetMapping("/isExist/{id}")
-    Boolean isBookExist(@PathVariable Long id);
+    boolean isBookExist(@PathVariable Long id);
 }
