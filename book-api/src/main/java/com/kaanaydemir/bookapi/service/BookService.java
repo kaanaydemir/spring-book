@@ -40,6 +40,10 @@ public class BookService {
                 author);
     }
 
+    public boolean isBookExist(Long id) {
+        return bookRepository.existsById(id);
+    }
+
 
     public Long saveBook(BookDto bookDto) {
         return bookRepository.save(mapper.convert(bookDto)).getId();

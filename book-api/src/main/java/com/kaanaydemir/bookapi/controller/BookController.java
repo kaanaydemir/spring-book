@@ -35,4 +35,9 @@ public class BookController {
     public ResponseEntity<GetBookDetailsResponse> getBookDetailsById(@PathVariable Long id) {
         return ResponseEntity.ok(bookService.getBookDetailsById(id));
     }
+
+    @GetMapping("/isExist/{id}")
+    public ResponseEntity<Boolean> isBookExist(@PathVariable Long id) {
+        return ResponseEntity.ok(bookService.isBookExist(id));
+    }
 }
