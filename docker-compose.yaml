@@ -25,3 +25,53 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+
+  author-api:
+    image: kaanaydemir0/author-api:0.0.3
+    container_name: author-api
+    restart: always
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/author
+      - SPRING_DATASOURCE_USERNAME=author
+      - SPRING_DATASOURCE_PASSWORD=author
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+  postgres-db:
+    image: postgres:13.1
+    container_name: postgres-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: author
+      POSTGRES_PASSWORD: author
+      POSTGRES_DB: author
+
+  prometheus:
+    image: prom/prometheus:v2.37.1
+    container_name: prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - author-api
+
+  grafana:
+    image: grafana/grafana-oss:8.5.2
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    links:
+      - prometheus:prometheus
+    volumes:
+      - ./grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
