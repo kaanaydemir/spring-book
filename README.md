@@ -1,3 +1,3 @@
 # spring-book
 
-![Blank board](https://github.com/kaanaydemir/spring-book/assets/13259200/79c6cf63-99d0-4b24-a408-68d59b756dc9)
+![Blank board (1)](https://github.com/kaanaydemir/spring-book/assets/13259200/eecbbd2c-56a8-4da0-b92b-cbdcda733a25)
